@@ -203,7 +203,7 @@
         android:text=" Correct "
         android:textColor="@color/black"
         android:textSize="25sp"
-        android:alpha="0"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHeight_percent="0.2"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -217,13 +217,14 @@
         android:layout_gravity="fill"
         android:layout_marginHorizontal="50dp"
         android:fontFamily="@font/baloo_bhai"
+        android:onClick="restartGame"
         android:tag="3"
         android:text="Restart Game"
-        android:onClick="restartGame"
         android:textSize="30sp"
+        android:visibility="invisible"
         app:cornerRadius="40dp"
-        android:alpha="0"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/left_ConstLayout"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        tools:layout_editor_absoluteX="50dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

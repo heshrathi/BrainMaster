@@ -31,19 +31,27 @@ public class GameActivity extends AppCompatActivity {
     int numberOfQuestions = 0;
 
 
-    public void restartGame() {
-        restart.setAlpha(0);
-        option1.setAlpha(1);
-        option2.setAlpha(1);
-        option3.setAlpha(1);
-        option4.setAlpha(1);
-        problem.setAlpha(1);
+    public void restartGame(View view) {
+        resultText.setVisibility(View.INVISIBLE);
+        restart.setVisibility(View.INVISIBLE);
+        option1.setVisibility(View.VISIBLE);
+        option2.setVisibility(View.VISIBLE);
+        option3.setVisibility(View.VISIBLE);
+        option4.setVisibility(View.VISIBLE);
+        problem.setVisibility(View.VISIBLE);
 
-        check = true;
+        //check = true;
         score = 0;
         numberOfQuestions = 0;
+        scoreText.setText(Integer.toString(score) + " / " + Integer.toString(numberOfQuestions));
 
-        new CountDownTimer(5400, 1000) {
+        newQuestion();
+        countdownTimer();
+    }
+
+    public void countdownTimer() {
+
+        new CountDownTimer(30500, 1000) {
 
             @Override
             public void onTick(long millisUntilFinished) {
@@ -53,17 +61,14 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 resultText.setText("Time Up!!");
-                restart.setAlpha(1);
-                option1.setAlpha(0);
-                option2.setAlpha(0);
-                option3.setAlpha(0);
-                option4.setAlpha(0);
-                problem.setAlpha(0);
-
-                newQuestion();
+                restart.setVisibility(View.VISIBLE);
+                option1.setVisibility(View.INVISIBLE);
+                option2.setVisibility(View.INVISIBLE);
+                option3.setVisibility(View.INVISIBLE);
+                option4.setVisibility(View.INVISIBLE);
+                problem.setVisibility(View.INVISIBLE);
             }
         }.start();
-
     }
 
     public void newQuestion() {
@@ -130,12 +135,14 @@ public class GameActivity extends AppCompatActivity {
         numberOfQuestions++;
 
         if (Integer.toString(correctAnswerLocation).equals(view.getTag().toString())) {
-            resultText.setAlpha(1);
+
             resultText.setText("Correct Answer");
+            resultText.setVisibility(View.VISIBLE);
             score++;
         } else {
-            resultText.setAlpha(1);
+
             resultText.setText("Wrong Answer");
+            resultText.setVisibility(View.VISIBLE);
         }
         //check = false;
 
@@ -160,8 +167,6 @@ public class GameActivity extends AppCompatActivity {
         resultText = findViewById(R.id.gameStatus_TextView);
         restart = findViewById(R.id.restartBtn);
 
-        newQuestion();
-        restartGame();
-
+        restartGame(restart);
     }
 }
